@@ -1,12 +1,33 @@
-# React + Vite
+E-Commerce Product Page 🛒
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fully responsive e-commerce product page built with "React.js" and "TailwindCSS".  
+This project showcases product listings, add-to-cart functionality, and responsive design, deployed live on Vercel.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+🚀 Live Demo
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+👉 [Live Site Here](https://nexusmart-chi.vercel.app/)
+
+
+
+📦 Features
+
+- Responsive design for mobile, tablet, and desktop.
+- Add to Cart functionality with dynamic cart counter.
+- 10+ products displayed in a clean product grid.
+- Modern UI with TailwindCSS.
+- Navbar with Login button and Cart icon.
+- Deployed live using Vercel.
+
+
+
+🛠️ Built With
+
+- React.js
+- TailwindCSS
+- Vite
+- GitHub + Vercel for deployment
+
+
+
