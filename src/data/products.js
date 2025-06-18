@@ -53,7 +53,7 @@ const products = [
       description: "Ergonomic stand for laptops.",
       price: 999,
        dprice: 799,
-      image: "https://www.portronics.com/cdn/shop/products/My_Buddy_K-1.jpg?v=1647439795",
+      image: "https://makerbazar.in/cdn/shop/products/LaptpStand.jpg?v=1676983144",
     },
     {
       id: 8,
