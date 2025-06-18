@@ -5,9 +5,13 @@ import ProductCard from './components/ProductCard';
 import products from './data/products';
 import CartPage from "./pages/CartPage";
 import LoginPage from './pages/LoginPage';
-import SignupPage from './pages/SignupPage'; // ✅ Ensure this file exists
+import SignupPage from './pages/SignupPage'; 
+import ProfilePage from './pages/ProfilePage';
 import { CartProvider } from "./context/CartContext";
 import './App.css';
+import ProtectedRoute from './components/ProtectedRoute';
+// import PrivateRoute from './components/privateRoute.jsx';
+// import HomeGuard from './components/HomeGuard';
 
 function HomePage() {
   const [cartCount, setCartCount] = useState(0);
@@ -37,10 +41,18 @@ function App() {
     <CartProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/cart" element={<CartPage />} />
+          <Route path="/" element={
+              <ProtectedRoute>
+      <HomePage />
+    </ProtectedRoute>} />
+          <Route path="/cart" element={<ProtectedRoute>
+      <CartPage />
+    </ProtectedRoute>} /> 
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
+          <Route path="/profile" element={<ProtectedRoute>
+      <ProfilePage />
+    </ProtectedRoute>} />
         </Routes>
       </Router>
     </CartProvider>
