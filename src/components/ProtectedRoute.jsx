@@ -10,6 +10,7 @@ const ProtectedRoute = ({ children }) => {
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
+    let timer;
     if (token) return; // ✅ Logged in, allow all access
 
     if (location.pathname === '/') {
@@ -17,16 +18,18 @@ const ProtectedRoute = ({ children }) => {
       if (hasUsedPreview) {
         setRedirect(true); // ⛔ Already used preview, redirect immediately
       } else {
-        const timer = setTimeout(() => {
+        timer = setTimeout(() => {
           localStorage.setItem('previewUsed', 'true'); // 📝 Mark preview as used
           setRedirect(true);
         }, 10000); // ⏳ 10 sec
-        return () => clearTimeout(timer);
       }
     } else {
       // ⛔ All other pages need login
       setRedirect(true);
     }
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
   }, [location.pathname, token, hasUsedPreview]);
 
   if (redirect && !token) {

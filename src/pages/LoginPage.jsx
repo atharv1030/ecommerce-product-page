@@ -1,15 +1,23 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react'; // ✅ added useRef, useEffect
 import { Link, useNavigate } from 'react-router-dom';
 import { auth, provider, signInWithPopup } from '../firebase';
 import Navbar from '../components/Navbar';
 import axios from 'axios';
+import { useUser } from '../context/userContext';
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const { login } = useUser();
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+
+  const emailRef = useRef(null); // ✅ create ref
+
+  useEffect(() => {
+    emailRef.current?.focus(); // ✅ focus input on mount
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,9 +42,9 @@ const LoginPage = () => {
       });
 
       localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
       localStorage.setItem('loginMethod', 'email');
 
+      login(response.data.user);
       navigate('/');
     } catch (err) {
       setError(err.response?.data?.error || 'Login failed. Please try again.');
@@ -52,24 +60,18 @@ const LoginPage = () => {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      console.log(user,"test user sadatsa");
-      
-      const token = await user.getIdToken();
 
       const response = await axios.post('http://localhost:5000/api/signup', {
-
         name: user.displayName,
         email: user.email,
-        // contpasact: user.phoneNumber || '',
         isGooglelogin: true,
-        password:user.accessToken
-        // token: token
+        password: user.accessToken
       });
 
       localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
       localStorage.setItem('loginMethod', 'google');
 
+      login(response.data.user);
       navigate('/');
     } catch (err) {
       setError('Google login failed. Please try again.');
@@ -89,6 +91,7 @@ const LoginPage = () => {
 
         <form className="space-y-6" onSubmit={handleSubmit}>
           <input
+            ref={emailRef} // ✅ useRef here
             name="email"
             type="email"
             value={formData.email}
