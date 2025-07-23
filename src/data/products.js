@@ -80,6 +80,10 @@ const products = [
       image: "https://assets.myntassets.com/w_412,q_60,dpr_2,fl_progressive/assets/images/31786009/2024/12/5/53d3a42c-10a3-4f8f-983c-f15a6ef062971733418362973-JBL-Wireless-TWS-ANC-Earbuds-2871733418362369-1.jpg",
     },
   ];
+
+
+
+
   
   export default products;
   

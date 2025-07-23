@@ -4,33 +4,48 @@ import { Navigate, useLocation } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
   const location = useLocation();
+  const [status, setStatus] = useState('checking'); // 'checking', 'preview', 'authenticated', 'redirect'
   const token = localStorage.getItem('token');
   const hasUsedPreview = localStorage.getItem('previewUsed');
 
-  const [redirect, setRedirect] = useState(false);
-
   useEffect(() => {
-    if (token) return; // ✅ Logged in, allow all access
+    if (token) {
+      setStatus('authenticated');
+      return;
+    }
 
     if (location.pathname === '/') {
-      // 🕒 Allow preview only once
       if (hasUsedPreview) {
-        setRedirect(true); // ⛔ Already used preview, redirect immediately
+        setStatus('redirect');
       } else {
+        setStatus('preview');
         const timer = setTimeout(() => {
-          localStorage.setItem('previewUsed', 'true'); // 📝 Mark preview as used
-          setRedirect(true);
-        }, 10000); // ⏳ 10 sec
+          localStorage.setItem('previewUsed', 'true');
+          setStatus('redirect');
+        }, 10000);
+
         return () => clearTimeout(timer);
       }
     } else {
-      // ⛔ All other pages need login
-      setRedirect(true);
+      setStatus('redirect');
     }
   }, [location.pathname, token, hasUsedPreview]);
 
-  if (redirect && !token) {
-    return <Navigate to="/login" replace />;
+  if (status === 'checking') return <div>Loading...</div>;
+
+  if (status === 'redirect') return (
+    <Navigate to="/login" state={{ from: location }} replace />
+  );
+
+  if (status === 'preview') {
+    return (
+      <div>
+        {children}
+        <div className="preview-notice fixed bottom-2 left-2 text-xs bg-yellow-100 text-black px-3 py-1 rounded shadow">
+          You're in preview mode. Login required after 10 seconds.
+        </div>
+      </div>
+    );
   }
 
   return children;
