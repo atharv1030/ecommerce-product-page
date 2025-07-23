@@ -71,8 +71,8 @@ function AdminCategoryPage() {
     }
   };
 
-  return (
-    <div className="p-8">
+  return ( 
+    <div className="p-8 ">
       <h2 className="text-2xl font-bold mb-4">Category Management</h2>
 
       <form onSubmit={handleSubmit} className="mb-6">

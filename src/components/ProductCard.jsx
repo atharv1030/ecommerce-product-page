@@ -9,34 +9,49 @@ function ProductCard({ product }) {
     cartItems
   } = useCart();
 
-  // Check if product is already in cart
   const cartItem = useMemo(
     () => cartItems.find((item) => item.id === product.id),
     [cartItems, product.id]
   );
 
   return (
-    <div className="bg-white p-12 shadow-lg rounded-lg overflow-hidden transition-transform hover:scale-[1.02]">
+    <div className="relative group bg-white dark:bg-gray-800 dark:text-white p-4 shadow-md dark:shadow-lg rounded-lg overflow-hidden transition-transform hover:scale-[1.02] border border-gray-200 dark:border-gray-700 mb-6">
+      
+      {/* Category Ribbon */}
+      <div className="absolute top-2 left-2 overflow-hidden z-10">
+        <div className="bg-blue-600 text-white text-xs px-2 py-1 rounded-r-full 
+                        transform -translate-x-full group-hover:translate-x-0 
+                        transition-transform duration-300 ease-in-out shadow-md">
+          {product.catname}
+        </div>
+      </div>
+
+      {/* Product Image */}
       <img
-        className="h-60 w-full object-cover"
+        className="h-90 sm:h-80 w-full object-cover rounded-md mb-4"
         src={product.image}
         alt={product.name}
       />
-      <div className="p-4">
-        <h3 className="text-lg font-bold mb-2">{product.name}</h3>
-        <p className="text-gray-700 mb-2 line-clamp-2">{product.description}</p>
+
+      {/* Product Info */}
+      <div>
+        <h3 className="text-lg font-bold mb-1">{product.name}</h3>
+        <p className="text-gray-700 dark:text-gray-300 text-sm mb-3 line-clamp-2">
+          {product.description}
+        </p>
 
         <div className="flex items-center gap-3 mb-4">
           {product.price && (
-            <p className="text-xl font-semibold text-red-600 line-through">
+            <p className="text-md font-semibold text-red-600 line-through">
               ₹{product.price}
             </p>
           )}
-          <p className="text-xl font-semibold text-green-600">
+          <p className="text-lg font-semibold text-green-600">
             ₹{product.dprice || product.price}
           </p>
         </div>
 
+        {/* Add to Cart or Quantity Controls */}
         {!cartItem ? (
           <button
             onClick={() =>
@@ -46,25 +61,27 @@ function ProductCard({ product }) {
                 quantity: 1
               })
             }
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md transition-colors"
           >
             Add to Cart
           </button>
         ) : (
           <div className="flex flex-col items-center gap-2">
-            <div className="flex items-center border rounded">
+            <div className="flex items-center border rounded dark:border-gray-600">
               <button
                 onClick={() =>
                   updateQuantity(cartItem.id, Math.max(1, cartItem.quantity - 1))
                 }
-                className="px-3 py-1 hover:bg-gray-100"
+                className="px-3 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
               >
                 -
               </button>
-              <span className="px-4 py-1 border-x">{cartItem.quantity}</span>
+              <span className="px-4 py-1 border-x dark:border-gray-600">
+                {cartItem.quantity}
+              </span>
               <button
                 onClick={() => updateQuantity(cartItem.id, cartItem.quantity + 1)}
-                className="px-3 py-1 hover:bg-gray-100"
+                className="px-3 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
               >
                 +
               </button>

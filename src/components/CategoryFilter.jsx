@@ -1,41 +1,49 @@
+// components/CategoryFilter.jsx
 import { useEffect, useState } from 'react';
 
-function CategoryFilter({ selectedCategory, setSelectedCategory }) {
+const CategoryFilter = ({ selectedCategory, setSelectedCategory }) => {
   const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/categories');
-        const data = await res.json();
+        const response = await fetch('http://localhost:5000/api/categories');
+        const data = await response.json();
         setCategories(data);
       } catch (err) {
         console.error('Error fetching categories:', err);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchCategories();
   }, []);
 
+  if (loading) {
+    return <div>Loading categories...</div>;
+  }
+
   return (
-    <div className="flex gap-4 flex-wrap mb-6">
+    <div className="flex flex-wrap gap-2 my-4">
       <button
         onClick={() => setSelectedCategory(null)}
-        className={`px-4 py-2 rounded ${selectedCategory === null ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
+        className={`px-4 py-2 rounded-full ${!selectedCategory ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
       >
-        All
+        All 
       </button>
-      {categories.map((cat) => (
+      {categories.map((category) => (
         <button
-          key={cat._id}
-          onClick={() => setSelectedCategory(cat._id)}
-          className={`px-4 py-2 rounded ${selectedCategory === cat._id ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
+          key={category._id}
+          onClick={() => setSelectedCategory(category._id)}
+          className={`px-4 py-2 rounded-full ${selectedCategory === category._id ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
         >
-          {cat.name}
+          {category.name}
         </button>
       ))}
     </div>
   );
-}
+};
 
 export default CategoryFilter;

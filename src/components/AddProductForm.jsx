@@ -12,7 +12,6 @@ function AddProductForm({ onProductAdd }) {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch categories from backend
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -25,7 +24,6 @@ function AddProductForm({ onProductAdd }) {
         setLoading(false);
       }
     };
-
     fetchCategories();
   }, []);
 
@@ -48,13 +46,13 @@ function AddProductForm({ onProductAdd }) {
     try {
       const res = await fetch("http://localhost:5000/api/products", {
         method: "POST",
-        body: formData
+        body: formData,
       });
 
       if (res.ok) {
         alert("Product added successfully!");
         onProductAdd();
-        setTimeout(() => navigate('/'), 3000);
+        setTimeout(() => navigate("/"), 3000);
         resetForm();
       } else {
         alert("Failed to add product");
@@ -75,24 +73,39 @@ function AddProductForm({ onProductAdd }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md space-y-4">
-      <h2 className="text-lg font-bold">Add Your Product</h2>
+    <form
+      onSubmit={handleSubmit}
+      className="max-w-2xl mx-auto bg-white dark:bg-gray-900 dark:text-white p-6 rounded-lg shadow-md dark:shadow-lg space-y-5"
+    >
+      <h2 className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+        Add Your Product
+      </h2>
 
-      <input
-        type="file"
-        accept="image/*"
-        onChange={(e) => setImage(e.target.files[0])}
-        className="w-full"
-        required
-      />
-      {image && <img src={URL.createObjectURL(image)} alt="Preview" className="h-40 object-cover rounded" />}
+      {/* Image Upload */}
+      <div>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => setImage(e.target.files[0])}
+          className="w-full p-2 border rounded dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+          required
+        />
+        {image && (
+          <img
+            src={URL.createObjectURL(image)}
+            alt="Preview"
+            className="h-40 object-cover rounded mt-4 border dark:border-gray-700"
+          />
+        )}
+      </div>
 
+      {/* Text Inputs */}
       <input
         type="text"
         placeholder="Product Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        className="w-full p-2 border rounded"
+        className="w-full p-3 border rounded dark:border-gray-700 dark:bg-gray-800 dark:text-white"
         required
       />
 
@@ -100,7 +113,7 @@ function AddProductForm({ onProductAdd }) {
         placeholder="Product Description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        className="w-full p-2 border rounded"
+        className="w-full p-3 border rounded dark:border-gray-700 dark:bg-gray-800 dark:text-white"
         required
       />
 
@@ -109,7 +122,7 @@ function AddProductForm({ onProductAdd }) {
         placeholder="Price"
         value={price}
         onChange={(e) => setPrice(e.target.value)}
-        className="w-full p-2 border rounded"
+        className="w-full p-3 border rounded dark:border-gray-700 dark:bg-gray-800 dark:text-white"
         required
       />
 
@@ -118,19 +131,23 @@ function AddProductForm({ onProductAdd }) {
         placeholder="Discount Price"
         value={dprice}
         onChange={(e) => setdprice(e.target.value)}
-        className="w-full p-2 border rounded"
+        className="w-full p-3 border rounded dark:border-gray-700 dark:bg-gray-800 dark:text-white"
         required
       />
 
+      {/* Category Dropdown */}
       {loading ? (
-        <select disabled className="w-full p-2 border rounded bg-gray-100">
+        <select
+          disabled
+          className="w-full p-3 border rounded bg-gray-100 dark:bg-gray-700 dark:text-gray-300"
+        >
           <option>Loading categories...</option>
         </select>
       ) : (
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="w-full p-3 border rounded dark:border-gray-700 dark:bg-gray-800 dark:text-white"
           required
         >
           <option value="">Select Category</option>
@@ -142,18 +159,18 @@ function AddProductForm({ onProductAdd }) {
         </select>
       )}
 
+      {/* Buttons */}
       <div className="flex space-x-4">
         <button
           type="submit"
-          onClick={() => navigate('/')}
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 flex-1"
+          className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex-1 transition-colors"
         >
           Add Product
         </button>
         <button
           type="button"
-          onClick={() => navigate('/')}
-          className="bg-cyan-600 text-white px-4 py-2 rounded hover:bg-cyan-700 flex-1"
+          onClick={() => navigate("/")}
+          className="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-md flex-1 transition-colors"
         >
           Home
         </button>

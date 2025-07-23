@@ -31,7 +31,7 @@ function Marketplace() {
             id: product._id,
             price: product.price,
             dprice: product.price,
-            image: `http://localhost:5000${product.imageUrl}`,
+            image: product.image,
           }} />
         ))}
       </div>

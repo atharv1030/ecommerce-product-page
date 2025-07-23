@@ -37,7 +37,7 @@ const ProfilePage = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/update-profile', {
+      const response = await fetch('http://localhost:5000/api/user/update-profile', {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -57,7 +57,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 max-w-4xl">
+    <div className="container mx-auto p-4 max-w-4xl dark:bg-gray-800 dark:text-white dark:border-gray-700 dark:shadow-lg dark:bg-gray-800">
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <div className="bg-blue-600 p-6 text-white">
           <h1 className="text-2xl font-bold">User Profile</h1>
