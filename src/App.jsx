@@ -7,10 +7,11 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import ProfilePage from './pages/ProfilePage';
 import { CartProvider } from "./context/CartContext";
-import { UserProvider } from "./context/userContext";
+import { UserProvider } from "./context/userContext.jsx";
 import './App.css';
 import ProtectedRoute from './components/ProtectedRoute';
-import Marketplace from "./pages/MarketPlace";
+import MarketPlace from './pages/Marketplace.jsx';
+
 import AddProductForm from './components/AddProductForm';
 import CategoryFilter from './components/CategoryFilter';
 import AdminCategoryPage from './pages/AdminCategoryPage';
@@ -139,7 +140,7 @@ function App() {
               </ProtectedRoute>
             } />
             <Route path="/admin/categories" element={<AdminCategoryPage />} />
-            <Route path="/marketplace" element={<Marketplace />} />
+            <Route path="/marketplace" element={<MarketPlace />} />
           </Routes>
         </Router>
       </UserProvider>
