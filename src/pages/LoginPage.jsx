@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { auth, provider, signInWithPopup } from '../firebase';
 import Navbar from '../components/Navbar';
 import axios from 'axios';
-import { useUser } from '../context/userContext';
+import { useUser } from '../context/UserContext';
 
 const LoginPage = () => {
   const navigate = useNavigate();

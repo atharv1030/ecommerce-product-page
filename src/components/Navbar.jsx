@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
-import { useUser } from "../context/userContext"; // ✅ NEW
+import { useUser } from "../context/UserContext"; // ✅ NEW
 import { useEffect, useState } from "react";
 
 function Navbar() {
