@@ -7,7 +7,7 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import ProfilePage from './pages/ProfilePage';
 import { CartProvider } from "./context/CartContext";
-import { UserProvider } from "./context/userContext";
+import { UserProvider } from "./context/userContext.jsx";
 import './App.css';
 import ProtectedRoute from './components/ProtectedRoute';
 import MarketPlace from './pages/Marketplace.jsx';
