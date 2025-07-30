@@ -35,7 +35,7 @@ const LoginPage = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', {
+      const response = await axios.post('https://nexusmart123.netlify.app/api/auth/login', {
         email: formData.email,
         password: formData.password,
       });
@@ -61,7 +61,7 @@ const LoginPage = () => {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      const response = await axios.post('http://localhost:5000/api/auth/signup', {
+      const response = await axios.post('https://nexusmart123.netlify.app/api/auth/signup', {
         name: user.displayName,
         email: user.email,
         isGooglelogin: true,

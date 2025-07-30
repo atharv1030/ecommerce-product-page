@@ -15,7 +15,7 @@ function AddProductForm({ onProductAdd }) {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/categories");
+        const res = await fetch("https://nexusmart123.netlify.app/api/categories");
         const data = await res.json();
         setCategories(data);
       } catch (error) {
@@ -44,7 +44,7 @@ function AddProductForm({ onProductAdd }) {
     formData.append("image", image);
 
     try {
-      const res = await fetch("http://localhost:5000/api/products", {
+      const res = await fetch("https://nexusmart123.netlify.app/api/products", {
         method: "POST",
         body: formData,
       });

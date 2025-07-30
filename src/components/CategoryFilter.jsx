@@ -8,7 +8,7 @@ const CategoryFilter = ({ selectedCategory, setSelectedCategory }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/categories');
+        const response = await fetch('https://nexusmart123.netlify.app/api/categories');
         const data = await response.json();
         setCategories(data);
       } catch (err) {

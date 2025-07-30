@@ -27,7 +27,7 @@ export default function SignupPage() {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/signup', formData);
+      const response = await axios.post('https://nexusmart123.netlify.app/api/auth/signup', formData);
 
       if (!response.data || !response.data.token) {
         throw new Error(response.data.error || 'Signup failed');

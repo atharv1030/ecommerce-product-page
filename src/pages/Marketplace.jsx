@@ -6,7 +6,7 @@ function Marketplace() {
   const [products, setProducts] = useState([]);
 
   const fetchProducts = async () => {
-    const res = await fetch("http://localhost:5000/api/products");
+    const res = await fetch("https://nexusmart123.netlify.app/api/products");
     const data = await res.json();
     setProducts(data);
   };

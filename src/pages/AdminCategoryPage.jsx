@@ -8,7 +8,7 @@ function AdminCategoryPage() {
 
   const fetchCategories = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/categories');
+      const res = await fetch('https://nexusmart123.netlify.app/api/categories');
       const data = await res.json();
       setCategories(data);
     } catch (err) {
@@ -24,8 +24,8 @@ function AdminCategoryPage() {
     e.preventDefault();
     const method = editingCategoryId ? 'PUT' : 'POST';
     const url = editingCategoryId
-      ? `http://localhost:5000/api/categories/${editingCategoryId}`
-      : 'http://localhost:5000/api/categories';
+      ? `https://nexusmart123.netlify.app/api/categories/${editingCategoryId}`
+      : 'https://nexusmart123.netlify.app/api/categories';
 
     try {
       const res = await fetch(url, {
@@ -58,7 +58,7 @@ function AdminCategoryPage() {
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure?')) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/categories/${id}`, {
+      const res = await fetch(`https://nexusmart123.netlify.app/api/categories/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,

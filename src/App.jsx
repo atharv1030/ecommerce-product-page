@@ -31,8 +31,8 @@ function HomePage() {
     const fetchProducts = async () => {
       try {
         const url = selectedCategory
-          ? `http://localhost:5000/api/products/category/${selectedCategory}`
-          : 'http://localhost:5000/api/products';
+          ? `https://nexusmart123.netlify.app/api/products/category/${selectedCategory}`
+          : 'https://nexusmart123.netlify.app/api/products';
 
         const response = await fetch(url, {
           headers: {
