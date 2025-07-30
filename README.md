@@ -7,7 +7,7 @@ This project showcases product listings, add-to-cart functionality, and responsi
 
 🚀 Live Demo
 
-👉 [Live Site Here](https://nexusmart-chi.vercel.app/)
+👉 [Live Site Here](https://nexusmart123.netlify.app/)
 
 
 
