@@ -115,32 +115,29 @@ function App() {
       <UserProvider>
         <Router>
           <Routes>
-            <Route path="/" element={
-              <ProtectedRoute>
-                <HomePage />
-              </ProtectedRoute>
-            } />
-            <Route path="/cart" element={
-              <ProtectedRoute>
-                <CartPage />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin" element={<SiteAdmin />}>
-              <Route index element={<Dashboard />} />
-              <Route path="products" element={<ProductsAdmin />} />
-              <Route path="users" element={<UsersAdmin />} />
-            </Route>
-            console.log("Admin Category Page");
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignupPage />} />
-            <Route path="/AddProductForm" element={<AddProductForm />} />
-            <Route path="/profile" element={
-              <ProtectedRoute>
-                <ProfilePage />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/categories" element={<AdminCategoryPage />} />
-            <Route path="/marketplace" element={<MarketPlace />} />
+            <Route path="/" element={<HomePage />} />
+<Route path="/cart" element={
+  <ProtectedRoute>
+    <CartPage />
+  </ProtectedRoute>
+} />
+<Route path="/admin" element={<SiteAdmin />}>
+  <Route index element={<Dashboard />} />
+  <Route path="products" element={<ProductsAdmin />} />
+  <Route path="users" element={<UsersAdmin />} />
+</Route>
+
+<Route path="/login" element={<LoginPage />} />
+<Route path="/signup" element={<SignupPage />} />
+<Route path="/AddProductForm" element={<AddProductForm />} />
+<Route path="/profile" element={
+  <ProtectedRoute>
+    <ProfilePage />
+  </ProtectedRoute>
+} />
+<Route path="/admin/categories" element={<AdminCategoryPage />} />
+<Route path="/marketplace" element={<MarketPlace />} />
+
           </Routes>
         </Router>
       </UserProvider>
